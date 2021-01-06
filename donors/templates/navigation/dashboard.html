@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4 class="text-center mt-4">List of available donors</h4>
+<div class="ms-auto text-center my-4">
+  
+  <form method="GET">
+    <label class="small" for="bl_group">Looking for: </label>
+    <select name="bl_group">
+      <option value="all">All</option>
+      <option value="a+">A RhD Positive (A+)</option>
+      <option value="a-">A RhD Negative (A-)</option>
+      <option value="b+">B RhD Positive (B+)</option>
+      <option value="b-">B RhD Negative (B-)</option>
+      <option value="o+">o RhD Positive (O+)</option>
+      <option value="o-">o RhD Negative (O-)</option>
+      <option value="ab+">AB RhD Positive (AB+)</option>
+      <option value="ab-">AB RhD Negative (AB-)</option>
+    </select>
+    <button type="submit" class="btn btn-danger btn-sm">Go</button>
+  </form>  
+</div>
+<div class="mt-2 container">
+  <div class="row row-cols-2 d-flex justify-content-center">
+    {% for people in data %}
+      {% if people.email != request.user.email %}
+      <div class="card border-danger mb-3 col mx-2" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <h1 class="text-danger">{{ people.blood_group }}</h1>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{people.name}}</h5>
+              <p class="card-text">{{ people.info }}</p>
+              <p class="card-text"><small class="text-muted">{{ people.email }}</small></p>
+              <hr class="bg-danger">
+              <a href="{% url 'mail' people.id %}" class="btn btn-outline-danger btn-sm">Message</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+      
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4 class="text-center mt-4">Massages <small>(New message at top)</small> </h4>
+<div class="mt-2 container">
+  <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
+    {% for msg in data %}
+      <div class="card border-danger mb-3 col mx-lg-2" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">From: <small class="text-danger">{{msg.email_from}}</small></h5>
+              <p class="card-text">{{ msg.message | safe}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+      
+</div>
+
+{% endblock content %}

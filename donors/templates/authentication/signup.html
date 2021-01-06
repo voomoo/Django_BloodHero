@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <div class="container d-flex flex-column justify-content-around align-items-center">
+                <img class="img img-fluid" width="500px" src="{% static 'images/undraw_super_woman_dv0y.png' %}" alt="hero">
+                <h3 class="text-danger">Become a HERO</h3>
+                <h5 class="text-danger mb-3">Donate Blood</h5>
+            </div>
+        </div>
+        <div class="col my-auto">
+            <div class="container d-flex flex-column justify-content-around align-items-center">
+                <h4 class="text-danger">Sign Up</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field.label }} <br>
+                    {{ field }} <br>
+                    {% for error in field.errors %}
+                    <ul>
+                        <li><small class="text-danger">{{ error }}</small></li>
+                    </ul>
+                    {% endfor %}
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-danger mt-3 w-100">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

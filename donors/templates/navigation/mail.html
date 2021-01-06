@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col my-auto">
+            <div class="d-flex flex-column justify-content-around align-items-center">
+                
+                <form method="POST" class="bg-light px-5 py-4 card border-danger">
+                    <h4 class="text-danger text-center mb-4">Message</h4>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button class="btn btn-danger mt-3 w-100">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
